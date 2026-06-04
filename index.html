@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
 <title>Gîte NOMADE chez Moulay – Boutique Berber Lodge | High Atlas, Imilchil</title>
 <meta name="description" content="9 authentic Berber rooms at Gîte NOMADE chez Moulay in Imilchil (2119m). Suites, family rooms, doubles, dorms. Organic cuisine, private treks to Tislit & Isli lakes.">
 <meta name="keywords" content="9 rooms Imilchil, Berber lodge High Atlas, guesthouse Imilchil, Tislit lake trek, family room Atlas">
@@ -23,108 +23,170 @@
     --accent: #B45F3B; --accent-light: #D98E6A; --accent-dark: #8B3E1F;
     --border-light: #EAE5DF; --font-sans: 'Plus Jakarta Sans', sans-serif; --font-serif: 'Cormorant Garamond', serif;
   }
-  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 75px; }
   body { font-family: var(--font-sans); background: var(--bg); color: var(--text-dark); line-height: 1.6; }
+  
+  /* Navigation - improved for mobile */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center;
-    justify-content: space-between; padding: 1.2rem 6vw; background: rgba(255,255,255,0.96);
+    justify-content: space-between; padding: 0.8rem 5vw; background: rgba(255,255,255,0.98);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); transition: 0.2s;
   }
-  nav.scrolled { padding: 0.8rem 6vw; background: rgba(255,255,255,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.03); }
-  .nav-logo { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--text-dark); text-decoration: none; letter-spacing: -0.02em; }
+  nav.scrolled { padding: 0.6rem 5vw; background: rgba(255,255,255,0.98); }
+  .nav-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--text-dark); text-decoration: none; }
   .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-  .nav-links a { color: var(--text-dark); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-cta { background: var(--accent); color: white !important; padding: 0.5rem 1.3rem; border-radius: 2rem; font-weight: 600 !important; }
-  .nav-cta:hover { background: var(--accent-dark); }
-  .lang-selector { display: flex; gap: 0.4rem; margin-left: 1rem; }
-  .lang-btn { background: transparent; border: 1px solid var(--border-light); color: var(--text-dark); padding: 0.3rem 0.8rem; border-radius: 2rem; font-size: 0.7rem; cursor: pointer; font-weight: 600; }
+  .nav-links { 
+    display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; 
+    background: white; padding: 2rem; gap: 1.5rem; align-items: center; 
+    transform: translateX(100%); transition: transform 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    z-index: 999; border-bottom: 1px solid var(--border-light);
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a { 
+    color: var(--text-dark); text-decoration: none; font-size: 1rem; font-weight: 600; 
+    padding: 0.75rem 1rem; width: 100%; text-align: center; border-radius: 2rem;
+    transition: background 0.2s;
+  }
+  .nav-links a:hover { background: var(--bg-off); }
+  .nav-cta { background: var(--accent); color: white !important; }
+  .nav-cta:hover { background: var(--accent-dark) !important; }
+  .lang-selector { display: flex; gap: 0.5rem; margin-left: auto; margin-right: 1rem; }
+  .lang-btn { 
+    background: transparent; border: 1px solid var(--border-light); color: var(--text-dark); 
+    padding: 0.4rem 0.9rem; border-radius: 2rem; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+  }
   .lang-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .nav-burger span { width: 26px; height: 2px; background: var(--text-dark); border-radius: 2px; }
+  .nav-burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+  .nav-burger span { width: 26px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: 0.2s; }
+  
+  /* Hero */
   #hero {
     min-height: 100vh; background: linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6)),
       url('https://thumbs.dreamstime.com/b/imilchil-morocco-october-berbers-men-traveling-truck-atlas-mountains-152680032.jpg') center/cover no-repeat;
     display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-    padding: 8rem 1.5rem 5rem; position: relative;
+    padding: 6rem 1.5rem 5rem; position: relative;
   }
-  .hero-tag { background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); color: white; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.4rem 1.2rem; border-radius: 3rem; margin-bottom: 1.5rem; animation: fadeUp 0.7s ease both; }
-  .hero-title { font-family: var(--font-serif); font-size: clamp(2.8rem, 8vw, 5.2rem); color: white; line-height: 1.1; max-width: 800px; font-weight: 600; }
+  .hero-tag { background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); color: white; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.4rem 1.2rem; border-radius: 3rem; margin-bottom: 1rem; }
+  .hero-title { font-family: var(--font-serif); font-size: clamp(2.2rem, 8vw, 5rem); color: white; line-height: 1.1; max-width: 800px; }
   .hero-title em { color: #F0C4A0; font-style: italic; }
-  .hero-sub { color: rgba(255,255,245,0.9); font-size: clamp(1rem, 2vw, 1.2rem); max-width: 520px; margin: 1.2rem auto 2rem; }
-  .btn-primary { background: var(--accent); color: white; padding: 0.85rem 2.2rem; border-radius: 3rem; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; border: none; cursor: pointer; }
+  .hero-sub { color: rgba(255,255,245,0.9); font-size: clamp(0.9rem, 4vw, 1.2rem); max-width: 520px; margin: 1rem auto 1.5rem; }
+  .btn-primary, .btn-outline { 
+    display: inline-block; padding: 0.9rem 1.8rem; border-radius: 3rem; font-weight: 600; 
+    text-decoration: none; transition: all 0.2s; margin: 0.3rem; font-size: 0.9rem;
+  }
+  .btn-primary { background: var(--accent); color: white; }
   .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
-  .btn-outline { background: transparent; color: white; padding: 0.85rem 2rem; border-radius: 3rem; border: 1.5px solid rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; transition: all 0.2s; }
+  .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.6); }
   .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
-  .hero-badges { position: absolute; bottom: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-  .hero-badge { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,245,0.85); font-size: 0.75rem; font-weight: 500; }
-  section { padding: 5rem 6vw; }
+  .hero-badges { position: absolute; bottom: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; padding: 0 1rem; }
+  .hero-badge { display: flex; align-items: center; gap: 0.4rem; color: rgba(255,255,245,0.85); font-size: 0.7rem; font-weight: 500; }
+  
+  /* Sections */
+  section { padding: 3rem 5vw; }
   .container { max-width: 1280px; margin: 0 auto; }
-  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.6rem; }
-  .section-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem; font-weight: 500; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+  .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 6vw, 3rem); color: var(--text-dark); line-height: 1.2; margin-bottom: 0.8rem; }
   .section-title em { color: var(--accent); font-style: italic; }
-  .section-lead { color: var(--text-muted); max-width: 560px; font-size: 1rem; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 2rem; }
-  .about-img-main { width: 100%; height: 500px; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08); }
-  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .section-lead { color: var(--text-muted); max-width: 560px; font-size: 0.95rem; }
+  
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1.5rem; }
+  @media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+  .about-img-main { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 24px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
   .feat-item { display: flex; gap: 0.8rem; align-items: flex-start; }
-  .feat-icon { width: 40px; height: 40px; background: rgba(180,95,59,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+  .feat-icon { width: 40px; height: 40px; background: rgba(180,95,59,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
   .feat-label { font-weight: 700; font-size: 0.85rem; }
   .feat-desc { font-size: 0.75rem; color: var(--text-muted); }
-  .about-quote { margin-top: 1.8rem; padding: 1rem 1.8rem; border-left: 4px solid var(--accent); background: rgba(180,95,59,0.04); border-radius: 12px; font-family: var(--font-serif); font-style: italic; color: var(--text-muted); }
-  .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 2rem; margin-top: 2rem; }
-  .room-card { background: var(--bg); border-radius: 20px; overflow: hidden; transition: all 0.3s; border: 1px solid var(--border-light); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-  .room-card:hover { transform: translateY(-8px); box-shadow: 0 25px 35px -12px rgba(0,0,0,0.1); border-color: transparent; }
-  .room-img { height: 240px; width: 100%; object-fit: cover; transition: transform 0.5s; }
-  .room-card:hover .room-img { transform: scale(1.02); }
-  .room-body { padding: 1.5rem; }
-  .room-name { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.4rem; }
-  .room-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
-  .room-price-num { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
-  .room-tag { background: rgba(180,95,59,0.08); color: var(--accent-dark); border-radius: 2rem; padding: 0.2rem 0.8rem; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-right: 0.4rem; margin-bottom: 0.4rem; }
-  .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; margin-top: 2rem; }
-  .exp-card { border-radius: 24px; overflow: hidden; position: relative; min-height: 360px; cursor: pointer; }
-  .exp-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.5s; }
-  .exp-card:hover img { transform: scale(1.05); }
-  .exp-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%); padding: 1.8rem 1.2rem 1.2rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
-  .exp-name { font-size: 1.3rem; font-weight: 700; color: white; font-family: var(--font-serif); }
-  .exp-desc { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+  .about-quote { margin-top: 1.5rem; padding: 1rem 1.2rem; border-left: 4px solid var(--accent); background: rgba(180,95,59,0.04); border-radius: 12px; font-family: var(--font-serif); font-style: italic; font-size: 0.9rem; }
+  
+  /* Rooms */
+  .rooms-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .rooms-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .rooms-grid { grid-template-columns: repeat(3, 1fr); } }
+  .room-card { background: var(--bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border-light); transition: 0.2s; }
+  .room-img { height: 220px; width: 100%; object-fit: cover; }
+  .room-body { padding: 1.2rem; }
+  .room-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .room-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .room-price-num { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+  .room-tag { background: rgba(180,95,59,0.08); color: var(--accent-dark); border-radius: 2rem; padding: 0.2rem 0.7rem; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-right: 0.3rem; margin-bottom: 0.3rem; }
+  .room-card .btn-primary { padding: 0.5rem 1rem; font-size: 0.75rem; display: inline-block; margin-top: 0.5rem; }
+  
+  /* Experiences */
+  .exp-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .exp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .exp-grid { grid-template-columns: repeat(4, 1fr); } }
+  .exp-card { border-radius: 24px; overflow: hidden; position: relative; min-height: 280px; cursor: pointer; }
+  .exp-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .exp-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%); padding: 1.5rem 1rem 1rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+  .exp-name { font-size: 1.2rem; font-weight: 700; color: white; font-family: var(--font-serif); }
+  .exp-desc { color: rgba(255,255,255,0.8); font-size: 0.75rem; }
+  
+  /* Food */
   #food { background: var(--bg-off); }
-  .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .menu-item { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding: 0.9rem 0; }
-  .menu-price { font-weight: 700; color: var(--accent); }
-  .food-extra-img { margin-top: 1.5rem; border-radius: 20px; width: 100%; max-height: 200px; object-fit: cover; }
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
-  .gallery-item { border-radius: 20px; overflow: hidden; transition: all 0.3s ease; background: var(--bg); border: 1px solid var(--border-light); }
-  .gallery-item img { width: 100%; height: 260px; object-fit: cover; transition: transform 0.5s ease; }
-  .gallery-item:hover { transform: translateY(-6px); box-shadow: 0 20px 30px -15px rgba(0,0,0,0.1); }
-  .gallery-item:hover img { transform: scale(1.02); }
-  .gallery-caption { padding: 1.2rem 1.2rem 1.5rem; text-align: center; }
-  .gallery-caption h4 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.3rem; }
-  .gallery-caption p { font-size: 0.8rem; color: var(--text-muted); }
-  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
-  .loc-map-wrap iframe { width: 100%; height: 420px; border-radius: 24px; border: none; }
-  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.8rem; margin-top: 2rem; }
-  .testi-card { background: var(--bg); border-radius: 20px; padding: 1.8rem; border: 1px solid var(--border-light); transition: 0.2s; }
+  .food-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 768px) { .food-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+  .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding: 0.8rem 0; flex-wrap: wrap; gap: 0.5rem; }
+  .menu-price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .food-extra-img { margin-top: 1.2rem; border-radius: 20px; width: 100%; max-height: 180px; object-fit: cover; }
+  
+  /* Gallery */
+  .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+  .gallery-item { border-radius: 20px; overflow: hidden; background: var(--bg); border: 1px solid var(--border-light); }
+  .gallery-item img { width: 100%; height: 220px; object-fit: cover; }
+  .gallery-caption { padding: 1rem; text-align: center; }
+  .gallery-caption h4 { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .gallery-caption p { font-size: 0.75rem; color: var(--text-muted); }
+  
+  /* Location */
+  .loc-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  @media (min-width: 768px) { .loc-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  .loc-map-wrap iframe { width: 100%; height: 300px; border-radius: 20px; border: none; }
+  
+  /* Testimonials */
+  .testi-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .testi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testi-card { background: var(--bg); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-light); }
+  .testi-stars { letter-spacing: 2px; color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  
+  /* Booking */
   #booking { background: linear-gradient(125deg, #2A241E 0%, #1A1612 100%); color: white; }
-  .booking-form { background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); border-radius: 28px; padding: 2rem; max-width: 720px; margin: 2rem auto; border: 1px solid rgba(255,255,255,0.1); }
-  .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 0.8rem; color: white; width: 100%; }
-  .form-submit { background: var(--accent-light); font-weight: 700; border-radius: 40px; padding: 0.9rem; width: 100%; border: none; color: white; cursor: pointer; transition: 0.2s; }
+  .booking-form { background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); border-radius: 24px; padding: 1.5rem; max-width: 720px; margin: 1.5rem auto; border: 1px solid rgba(255,255,255,0.1); }
+  .form-group { margin-bottom: 1rem; }
+  .form-group input, .form-group select, .form-group textarea { 
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; 
+    padding: 0.8rem; color: white; width: 100%; font-size: 0.9rem;
+  }
+  .form-submit { background: var(--accent-light); font-weight: 700; border-radius: 40px; padding: 0.9rem; width: 100%; border: none; color: white; cursor: pointer; font-size: 1rem; margin-top: 0.5rem; }
   .form-submit:hover { background: var(--accent); }
-  footer { background: var(--text-dark); color: rgba(255,255,245,0.7); padding: 3rem 6vw 2rem; }
-  footer a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .booking-contact { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; margin-top: 1.5rem; }
+  @media (min-width: 500px) { .booking-contact { flex-direction: row; justify-content: center; flex-wrap: wrap; } }
+  .booking-contact a { color: white; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+  
+  /* Footer */
+  footer { background: var(--text-dark); color: rgba(255,255,245,0.7); padding: 2rem 5vw; }
+  .footer-grid { display: flex; flex-direction: column; gap: 1.5rem; text-align: center; }
+  @media (min-width: 640px) { .footer-grid { flex-direction: row; justify-content: space-between; text-align: left; flex-wrap: wrap; } }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s; display: inline-block; margin: 0.2rem 0; }
   footer a:hover { color: var(--accent-light); }
-  .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; background: #25D366; width: 56px; height: 56px; border-radius: 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 99; transition: transform 0.2s; }
-  .whatsapp-float:hover { transform: scale(1.08); }
-  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  
+  /* WhatsApp Float */
+  .whatsapp-float { position: fixed; bottom: 1rem; right: 1rem; background: #25D366; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 99; }
+  .whatsapp-float:hover { transform: scale(1.05); }
+  
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1.5rem; gap: 1rem; align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .nav-burger { display: flex; }
-    .about-grid, .food-grid, .loc-grid { grid-template-columns: 1fr; gap: 2rem; }
+  
+  /* Mobile menu close button */
+  .close-menu { display: none; }
+  @media (max-width: 767px) {
+    .nav-links { top: 70px; background: white; width: 100%; height: calc(100vh - 70px); overflow-y: auto; }
+    .nav-links a { font-size: 1.1rem; padding: 1rem; }
   }
 </style>
 </head>
@@ -132,6 +194,11 @@
 
 <nav id="navbar">
   <a href="#hero" class="nav-logo">NOMADE <span>✦</span> IMILCHIL</a>
+  <div class="lang-selector">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
+  </div>
+  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="navlinks">
     <li><a href="#about">Story</a></li>
     <li><a href="#rooms">Rooms</a></li>
@@ -141,11 +208,6 @@
     <li><a href="#location">Location</a></li>
     <li><a href="#booking" class="nav-cta">Reserve</a></li>
   </ul>
-  <div class="lang-selector">
-    <button class="lang-btn active" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="fr">FR</button>
-  </div>
-  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
 
 <header id="hero">
@@ -158,7 +220,6 @@
 
 <section id="about"><div class="container">
   <div class="about-grid">
-    <!-- Updated clear image -->
     <div class="reveal"><img class="about-img-main" src="https://i.ibb.co/j9yXK2T2/Whats-App-Image-2026-06-04-at-17-41-02.jpg" alt="Clear view of Imilchil valley" loading="lazy"></div>
     <div class="reveal"><p class="section-label">OUR LEGACY</p><h2 class="section-title">The soul of the <em>High Atlas</em></h2><p class="section-lead">For generations, our family has welcomed travellers to Imilchil. At Gîte NOMADE chez Moulay, we blend refined Amazigh hospitality with subtle mountain luxury.</p>
     <div class="about-features"><div class="feat-item"><div class="feat-icon">🍃</div><div><div class="feat-label">Eco-built lodge</div><div class="feat-desc">Traditional rammed earth & stone</div></div></div><div class="feat-item"><div class="feat-icon">👨‍🌾</div><div><div class="feat-label">Family-owned</div><div class="feat-desc">Since 2015</div></div></div><div class="feat-item"><div class="feat-icon">🗺️</div><div><div class="feat-label">Private guides</div><div class="feat-desc">Certified experts</div></div></div><div class="feat-item"><div class="feat-icon">🌙</div><div><div class="feat-label">Dark sky reserve</div><div class="feat-desc">Stargazing haven</div></div></div></div>
@@ -168,15 +229,15 @@
 
 <section id="rooms" style="background: var(--bg-off);"><div class="container"><div class="reveal"><p class="section-label">OUR 9 ROOMS</p><h2 class="section-title">Chambers that <em>embrace the peaks</em></h2></div>
 <div class="rooms-grid">
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/rfHLpsmG/Whats-App-Image-2026-06-04-at-17-39-22.jpg" alt="Nomad Suite"><div class="room-body"><h3 class="room-name">Nomad Signature Suite</h3><p class="room-desc">Private terrace, king bed, en-suite hammam shower, mountain panorama.</p><div><span class="room-tag">Private terrace</span><span class="room-tag">King bed</span></div><div class="room-price"><div><span class="room-price-num">390 MAD</span> <span style="font-size:0.8rem;">/night</span><br><span style="font-size:0.7rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/ZpD8HynM/Whats-App-Image-2026-06-04-at-17-39-23-1.jpg" alt="Atlas Double"><div class="room-body"><h3 class="room-name">Atlas Double Room</h3><p class="room-desc">Cozy double, Berber textiles, shared terrace with valley views.</p><div><span class="room-tag">Valley view</span><span class="room-tag">Shared terrace</span></div><div class="room-price"><div><span class="room-price-num">280 MAD</span> <span style="font-size:0.8rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/XfGhq2Qr/3.webp" alt="Family Suite"><div class="room-body"><h3 class="room-name">Family Suite (4 pers)</h3><p class="room-desc">Two connecting rooms, private bathroom, ideal for families.</p><div><span class="room-tag">Connecting rooms</span><span class="room-tag">Private bath</span></div><div class="room-price"><div><span class="room-price-num">480 MAD</span> <span style="font-size:0.8rem;">/night</span><br><span style="font-size:0.7rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/1YVpS7Rs/4.webp" alt="Triple Atlas"><div class="room-body"><h3 class="room-name">Triple Atlas Room</h3><p class="room-desc">Three single beds or one double + single. Shared terrace, mountain light.</p><div><span class="room-tag">3 guests</span><span class="room-tag">Mountain view</span></div><div class="room-price"><div><span class="room-price-num">350 MAD</span> <span style="font-size:0.8rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/wFGBzSrT/5.webp" alt="Deluxe Balcony"><div class="room-body"><h3 class="room-name">Deluxe Double Balcony</h3><p class="room-desc">Private balcony overlooking the Atlas, luxurious linens, en-suite.</p><div><span class="room-tag">Private balcony</span><span class="room-tag">En-suite</span></div><div class="room-price"><div><span class="room-price-num">420 MAD</span> <span style="font-size:0.8rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/d0bjwyj8/6.webp" alt="Small Double"><div class="room-body"><h3 class="room-name">Small Double Room</h3><p class="room-desc">Compact, warm, traditional decor. Perfect for solo or couple on a budget.</p><div><span class="room-tag">Budget friendly</span><span class="room-tag">Shared bath</span></div><div class="room-price"><div><span class="room-price-num">220 MAD</span> <span style="font-size:0.8rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/pBm2TJ4T/7.webp" alt="Superior Twin"><div class="room-body"><h3 class="room-name">Superior Twin Room</h3><p class="room-desc">Two single beds, garden view, ideal for friends or colleagues.</p><div><span class="room-tag">Twin beds</span><span class="room-tag">Garden view</span></div><div class="room-price"><div><span class="room-price-num">300 MAD</span> <span style="font-size:0.8rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/Qj8KZNKK/8.webp" alt="Junior Suite"><div class="room-body"><h3 class="room-name">Junior Atlas Suite</h3><p class="room-desc">Spacious sitting area, fireplace, breathtaking lake views.</p><div><span class="room-tag">Fireplace</span><span class="room-tag">Lake view</span></div><div class="room-price"><div><span class="room-price-num">550 MAD</span> <span style="font-size:0.8rem;">/night</span><br><span style="font-size:0.7rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
-  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/TqYdg428/9.webp" alt="Trekker Dorm"><div class="room-body"><h3 class="room-name">Trekker's Dorm</h3><p class="room-desc">Comfy bunks, lockers, social lounge, perfect for solo adventurers.</p><div><span class="room-tag">Bunk beds</span><span class="room-tag">Lockers</span></div><div class="room-price"><div><span class="room-price-num">150 MAD</span> <span style="font-size:0.8rem;">/person</span><br><span style="font-size:0.7rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/rfHLpsmG/Whats-App-Image-2026-06-04-at-17-39-22.jpg" alt="Nomad Suite"><div class="room-body"><h3 class="room-name">Nomad Signature Suite</h3><p class="room-desc">Private terrace, king bed, en-suite hammam shower, mountain panorama.</p><div><span class="room-tag">Private terrace</span><span class="room-tag">King bed</span></div><div class="room-price"><div><span class="room-price-num">390 MAD</span> <span style="font-size:0.75rem;">/night</span><br><span style="font-size:0.65rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/ZpD8HynM/Whats-App-Image-2026-06-04-at-17-39-23-1.jpg" alt="Atlas Double"><div class="room-body"><h3 class="room-name">Atlas Double Room</h3><p class="room-desc">Cozy double, Berber textiles, shared terrace with valley views.</p><div><span class="room-tag">Valley view</span><span class="room-tag">Shared terrace</span></div><div class="room-price"><div><span class="room-price-num">280 MAD</span> <span style="font-size:0.75rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/XfGhq2Qr/3.webp" alt="Family Suite"><div class="room-body"><h3 class="room-name">Family Suite (4 pers)</h3><p class="room-desc">Two connecting rooms, private bathroom, ideal for families.</p><div><span class="room-tag">Connecting rooms</span><span class="room-tag">Private bath</span></div><div class="room-price"><div><span class="room-price-num">480 MAD</span> <span style="font-size:0.75rem;">/night</span><br><span style="font-size:0.65rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/1YVpS7Rs/4.webp" alt="Triple Atlas"><div class="room-body"><h3 class="room-name">Triple Atlas Room</h3><p class="room-desc">Three single beds or one double + single. Shared terrace, mountain light.</p><div><span class="room-tag">3 guests</span><span class="room-tag">Mountain view</span></div><div class="room-price"><div><span class="room-price-num">350 MAD</span> <span style="font-size:0.75rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/wFGBzSrT/5.webp" alt="Deluxe Balcony"><div class="room-body"><h3 class="room-name">Deluxe Double Balcony</h3><p class="room-desc">Private balcony overlooking the Atlas, luxurious linens, en-suite.</p><div><span class="room-tag">Private balcony</span><span class="room-tag">En-suite</span></div><div class="room-price"><div><span class="room-price-num">420 MAD</span> <span style="font-size:0.75rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/d0bjwyj8/6.webp" alt="Small Double"><div class="room-body"><h3 class="room-name">Small Double Room</h3><p class="room-desc">Compact, warm, traditional decor. Perfect for solo or couple on a budget.</p><div><span class="room-tag">Budget friendly</span><span class="room-tag">Shared bath</span></div><div class="room-price"><div><span class="room-price-num">220 MAD</span> <span style="font-size:0.75rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/pBm2TJ4T/7.webp" alt="Superior Twin"><div class="room-body"><h3 class="room-name">Superior Twin Room</h3><p class="room-desc">Two single beds, garden view, ideal for friends or colleagues.</p><div><span class="room-tag">Twin beds</span><span class="room-tag">Garden view</span></div><div class="room-price"><div><span class="room-price-num">300 MAD</span> <span style="font-size:0.75rem;">/night</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/Qj8KZNKK/8.webp" alt="Junior Suite"><div class="room-body"><h3 class="room-name">Junior Atlas Suite</h3><p class="room-desc">Spacious sitting area, fireplace, breathtaking lake views.</p><div><span class="room-tag">Fireplace</span><span class="room-tag">Lake view</span></div><div class="room-price"><div><span class="room-price-num">550 MAD</span> <span style="font-size:0.75rem;">/night</span><br><span style="font-size:0.65rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
+  <div class="room-card reveal"><img class="room-img" src="https://i.ibb.co/TqYdg428/9.webp" alt="Trekker Dorm"><div class="room-body"><h3 class="room-name">Trekker's Dorm</h3><p class="room-desc">Comfy bunks, lockers, social lounge, perfect for solo adventurers.</p><div><span class="room-tag">Bunk beds</span><span class="room-tag">Lockers</span></div><div class="room-price"><div><span class="room-price-num">150 MAD</span> <span style="font-size:0.75rem;">/person</span><br><span style="font-size:0.65rem;">breakfast included</span></div><a href="#booking" class="btn-primary" style="padding:0.5rem 1rem; font-size:0.75rem;">Select</a></div></div></div>
 </div></div></section>
 
 <section id="experiences"><div class="container"><div class="reveal"><p class="section-label">CURATED JOURNEYS</p><h2 class="section-title">Beyond the <em>path less traveled</em></h2></div>
@@ -187,13 +248,13 @@
   <div class="exp-card"><img src="https://i.ibb.co/r2HpPpS6/Whats-App-Image-2026-06-04-at-17-40-57-1.jpg" alt="Mule"><div class="exp-overlay"><div class="exp-name">Mule Expeditions</div><div class="exp-desc">Remote valleys</div></div></div>
 </div></div></section>
 
-<section id="gallery" style="background: var(--bg);"><div class="container"><div class="reveal" style="text-align: center; margin-bottom: 2rem;"><p class="section-label">IMILCHIL IN IMAGES</p><h2 class="section-title">A Glimpse into <em>Berber Life</em></h2><p class="section-lead" style="margin: 0 auto;">From festive gatherings to serene mountain landscapes.</p></div>
+<section id="gallery" style="background: var(--bg);"><div class="container"><div class="reveal" style="text-align: center; margin-bottom: 1rem;"><p class="section-label">IMILCHIL IN IMAGES</p><h2 class="section-title">A Glimpse into <em>Berber Life</em></h2><p class="section-lead" style="margin: 0 auto;">From festive gatherings to serene mountain landscapes.</p></div>
 <div class="gallery-grid">
   <div class="gallery-item reveal"><img src="https://media.routard.com/image/07/3/pt30895.1242073.w430.jpg" alt="Berber village"><div class="gallery-caption"><h4>Authentic Berber Village</h4><p>Traditional pisé houses nestled in the High Atlas mountains.</p></div></div>
   <div class="gallery-item reveal"><img src="https://media.routard.com/image/07/4/pt30896.1242074.w430.jpg" alt="Marriage festival"><div class="gallery-caption"><h4>Moussem des Fiançailles</h4><p>The legendary annual marriage festival, a celebration of love and tradition.</p></div></div>
   <div class="gallery-item reveal"><img src="https://media.routard.com/image/07/5/pt30897.1242075.w430.jpg" alt="Lake landscape"><div class="gallery-caption"><h4>Land of Legends</h4><p>Stunning landscapes shaped by the legend of Isli and Tislit lakes.</p></div></div>
 </div>
-<div class="reveal" style="text-align: center; margin-top: 2rem;"><p class="section-lead" style="margin: 0 auto; font-size: 0.9rem;">Imilchil is a rural commune perched at over 2,200 meters, renowned for its rich Amazigh culture and the famous Moussem des Fiançailles, a unique festival where collective marriages are celebrated with traditional music and dances.</p></div></div></section>
+<div class="reveal" style="text-align: center; margin-top: 1rem;"><p class="section-lead" style="margin: 0 auto; font-size: 0.85rem;">Imilchil is a rural commune perched at over 2,200 meters, renowned for its rich Amazigh culture and the famous Moussem des Fiançailles.</p></div></div></section>
 
 <section id="food"><div class="container"><div class="food-grid"><div class="reveal"><p class="section-label" style="color:var(--accent);">Gastronomy</p><h2 class="section-title">Flavours of <em>the Atlas plate</em></h2><p class="section-lead">Organic produce from our garden.</p>
 <ul class="menu-list"><li class="menu-item"><div><div class="menu-name">Slow-cooked Lamb Tagine</div><div class="menu-desc">Saffron, apricots</div></div><span class="menu-price">95 MAD</span></li>
@@ -206,7 +267,7 @@
 
 <section id="location"><div class="container"><div class="reveal"><p class="section-label">IMMERSE YOURSELF</p><h2 class="section-title">In the <em>epicenter</em> of legend</h2></div>
 <div class="loc-grid"><div class="loc-map-wrap"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6384.112918894255!2d-5.5590213!3d32.1280651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda2f1c472fe5525%3A0x4767902a057f2bff!2sG%C3%AEte%20NOMADE%20chez%20moulay!5e1!3m2!1sen!2sma!4v1710000000000!5m2!1sen!2sma" loading="lazy" title="Map"></iframe></div>
-<div><h3>Gîte NOMADE chez Moulay</h3><p>Imilchil Village, Drâa-Tafilalet, Morocco (2,119m).</p><div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:1rem;"><div><strong>🏞️ Lake Tislit</strong> 5 min</div><div><strong>💙 Lake Isli</strong> 12 min</div><div><strong>🗻 Amalou Peak</strong> Half-day trek</div><div><strong>🎉 Marriage Festival</strong> September</div></div></div></div></div></section>
+<div><h3>Gîte NOMADE chez Moulay</h3><p>Imilchil Village, Drâa-Tafilalet, Morocco (2,119m).</p><div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-top:1rem;"><div><strong>🏞️ Lake Tislit</strong> 5 min</div><div><strong>💙 Lake Isli</strong> 12 min</div><div><strong>🗻 Amalou Peak</strong> Half-day trek</div><div><strong>🎉 Marriage Festival</strong> September</div></div></div></div></div></section>
 
 <section id="testimonials"><div class="container"><div class="reveal" style="text-align:center;"><p class="section-label">TRAVELER'S VOICE</p><h2 class="section-title">What the <em>mountains echo</em></h2></div>
 <div class="testi-grid"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Exceeded all expectations. The suite was stunning, food exceptional. Worth every dirham."</p><div><strong>Elena R.</strong> – Barcelona</div></div>
@@ -214,22 +275,23 @@
 <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Stargazing from the lodge is surreal. High Atlas at its finest."</p><div><strong>James W.</strong> – London</div></div></div></div></section>
 
 <section id="booking"><div class="container"><div class="section-label" style="color:rgba(255,255,255,0.7);">EXCLUSIVE RESERVATION</div><h2 class="section-title" style="color:white;">Claim your <em>mountain sanctuary</em></h2>
-<form class="booking-form" id="bookingForm"><div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"><div class="form-group"><label>First name</label><input type="text" required></div><div class="form-group"><label>Last name</label><input type="text" required></div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>WhatsApp</label><input type="tel"></div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"><div class="form-group"><label>Check-in</label><input type="date" id="checkin" required></div><div class="form-group"><label>Check-out</label><input type="date" id="checkout" required></div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"><div class="form-group"><label>Room Type</label><select id="roomSelect"><option>Nomad Signature Suite – 390 MAD/night</option><option>Atlas Double Room – 280 MAD/night</option><option>Family Suite – 480 MAD/night</option><option>Triple Atlas – 350 MAD/night</option><option>Deluxe Double Balcony – 420 MAD/night</option><option>Small Double – 220 MAD/night</option><option>Superior Twin – 300 MAD/night</option><option>Junior Atlas Suite – 550 MAD/night</option><option>Trekker's Dorm – 150 MAD/person</option></select></div><div class="form-group"><label>Guests</label><select><option>1 guest</option><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select></div></div>
+<form class="booking-form" id="bookingForm"><div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;"><div class="form-group"><label>First name</label><input type="text" required></div><div class="form-group"><label>Last name</label><input type="text" required></div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;"><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>WhatsApp</label><input type="tel"></div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;"><div class="form-group"><label>Check-in</label><input type="date" id="checkin" required></div><div class="form-group"><label>Check-out</label><input type="date" id="checkout" required></div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;"><div class="form-group"><label>Room Type</label><select id="roomSelect"><option>Nomad Signature Suite – 390 MAD/night</option><option>Atlas Double Room – 280 MAD/night</option><option>Family Suite – 480 MAD/night</option><option>Triple Atlas – 350 MAD/night</option><option>Deluxe Double Balcony – 420 MAD/night</option><option>Small Double – 220 MAD/night</option><option>Superior Twin – 300 MAD/night</option><option>Junior Atlas Suite – 550 MAD/night</option><option>Trekker's Dorm – 150 MAD/person</option></select></div><div class="form-group"><label>Guests</label><select><option>1 guest</option><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select></div></div>
 <div class="form-group"><label>Special requests</label><textarea rows="2"></textarea></div>
 <button type="submit" class="form-submit">✦ Request booking ✦</button></form>
-<div style="display:flex; justify-content:center; gap:2rem; margin-top:2rem; flex-wrap:wrap;"><a href="tel:+212709085856" style="color:white;">📞 +212 709 085 856</a><a href="https://wa.me/212709085856" target="_blank" style="color:white;">💬 WhatsApp</a><a href="mailto:ouchenmoulay0@gmail.com" style="color:white;">✉️ ouchenmoulay0@gmail.com</a></div></div></section>
+<div class="booking-contact"><a href="tel:+212709085856">📞 +212 709 085 856</a><a href="https://wa.me/212709085856" target="_blank">💬 WhatsApp</a><a href="mailto:ouchenmoulay0@gmail.com">✉️ ouchenmoulay0@gmail.com</a></div></div></section>
 
-<footer style="background:var(--text-dark); padding:3rem 6vw 2rem;"><div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem; max-width:1280px; margin:0 auto;"><div><a href="#hero" style="font-family:var(--font-serif); font-size:1.4rem; color:white; text-decoration:none;">NOMADE ★ Imilchil</a><p style="max-width:260px; margin-top:0.5rem;">Berber welcome, cradled by the Atlas.</p></div><div><h4 style="color:white;">Explore</h4><a href="#about">Story</a><br><a href="#rooms">9 Rooms</a><br><a href="#experiences">Treks</a><br><a href="#gallery">Gallery</a></div><div><h4 style="color:white;">Connect</h4><a href="https://wa.me/212709085856">WhatsApp</a><br><a href="mailto:ouchenmoulay0@gmail.com">Email</a><br><a href="tel:+212709085856">Call us</a></div></div><div style="text-align:center; margin-top:2rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1.5rem;">© 2025 Gîte NOMADE chez Moulay · 9 Rooms · Elevated Mountain Hospitality</div></footer>
+<footer style="background:var(--text-dark);"><div class="footer-grid"><div><a href="#hero" style="font-family:var(--font-serif); font-size:1.3rem; color:white; text-decoration:none;">NOMADE ★ Imilchil</a><p style="margin-top:0.3rem;">Berber welcome, cradled by the Atlas.</p></div><div><h4 style="color:white;">Explore</h4><a href="#about">Story</a><br><a href="#rooms">9 Rooms</a><br><a href="#experiences">Treks</a><br><a href="#gallery">Gallery</a></div><div><h4 style="color:white;">Connect</h4><a href="https://wa.me/212709085856">WhatsApp</a><br><a href="mailto:ouchenmoulay0@gmail.com">Email</a><br><a href="tel:+212709085856">Call us</a></div></div><div style="text-align:center; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; font-size:0.75rem;">© 2025 Gîte NOMADE chez Moulay · 9 Rooms · Elevated Mountain Hospitality</div></footer>
 
-<a href="https://wa.me/212709085856" class="whatsapp-float" aria-label="Chat"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>
+<a href="https://wa.me/212709085856" class="whatsapp-float" aria-label="Chat"><svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>
 
 <script>
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
-  const burger = document.getElementById('burger'), navlinks = document.getElementById('navlinks');
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
   burger.addEventListener('click', () => navlinks.classList.toggle('open'));
   document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => navlinks.classList.remove('open')));
   const observer = new IntersectionObserver((entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1 });
