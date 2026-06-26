@@ -1,4 +1,13 @@
+# robots.txt for Chiz Mollay
+# This file tells search engine crawlers which pages they can access
+
 User-agent: *
 Allow: /
 
-Sitemap: https://gitenomadeimilchil.com/sitemap.xml
+# Block access to admin or private areas (add your own if needed)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# Sitemap location — helps search engines find all your pages
+Sitemap: https://www.chizmollay.com/sitemap.xml
