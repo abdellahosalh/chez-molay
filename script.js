@@ -62,7 +62,7 @@
     en: {
       eyebrow: 'HIGH ATLAS · 2,119M ALTITUDE · 9 BOUTIQUE ROOMS',
       h1: '<span class="line"><span>Where <em>silence</em></span></span><span class="line"><span>speaks &amp; <em>stars</em></span></span><span class="line"><span>feel <em>close</em></span></span>',
-      p: 'Gîte NOMADE chez Moulay — timeless Amazigh luxury at the heart of Imilchil. Nine handcrafted rooms cradled by the High Atlas Mountains.',
+      p: 'Gîte NO€E chez Moulay — timeless Amazigh luxury at the heart of Imilchil. Nine handcrafted rooms cradled by the High Atlas Mountains.',
       book: 'Secure Your Stay →',
       rooms: 'Explore Rooms',
       nav: 'Reserve Now',
@@ -70,7 +70,7 @@
     fr: {
       eyebrow: 'HAUT ATLAS · 2 119 M · 9 CHAMBRES BOUTIQUE',
       h1: '<span class="line"><span>Là où le <em>silence</em></span></span><span class="line"><span>parle &amp; les <em>étoiles</em></span></span><span class="line"><span>semblent <em>proches</em></span></span>',
-      p: 'Gîte NOMADE chez Moulay — luxe amazigh intemporel au cœur d\'Imilchil. Neuf chambres artisanales bercées par le Haut Atlas.',
+      p: 'Gîte NO€E chez Moulay — luxe amazigh intemporel au cœur d\'Imilchil. Neuf chambres artisanales bercées par le Haut Atlas.',
       book: 'Réserver →',
       rooms: 'Voir les chambres',
       nav: 'Réserver',
@@ -147,7 +147,7 @@
       guests: document.getElementById('f-guests').value,
       req: document.getElementById('f-req').value || 'None'
     };
-    const msg = encodeURIComponent(`Reservation Request — Gîte NOMADE\n\nName: ${data.name}\nEmail: ${data.email}\nCheck-in: ${data.ci}\nCheck-out: ${data.co}\nRoom: ${data.room}\nGuests: ${data.guests}\nRequests: ${data.req}`);
+    const msg = encodeURIComponent(`Reservation Request — Gîte NO€E\n\nName: ${data.name}\nEmail: ${data.email}\nCheck-in: ${data.ci}\nCheck-out: ${data.co}\nRoom: ${data.room}\nGuests: ${data.guests}\nRequests: ${data.req}`);
     setTimeout(() => window.open(`https://wa.me/212709085856?text=${msg}`, '_blank'), 1500);
   });
   form.querySelectorAll('.form-control').forEach(f => {
